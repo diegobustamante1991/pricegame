@@ -1,0 +1,563 @@
+[
+  {
+    "id": "kitchen-mug-owala",
+    "price": 29.95,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. A daily grab-and-go companion." },
+      { "type": "text", "value": "Brand starts with 'O'." },
+      { "type": "text", "value": "Stainless steel, about 20oz." },
+      { "type": "text", "value": "Title: Insulated Travel Mug with Leak-Proof Lid" }
+    ],
+    "title": "Insulated Travel Mug with Leak-Proof Lid",
+    "category": "Kitchen",
+    "brand": "Owala"
+  },
+  {
+    "id": "tech-mouse-ergo",
+    "price": 47.99,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. You hold it all day without thinking." },
+      { "type": "text", "value": "Feature: Changes your wrist angle." },
+      { "type": "text", "value": "Wireless, rechargeable, multi-device." },
+      { "type": "text", "value": "Title: Ergonomic Wireless Vertical Mouse" }
+    ],
+    "title": "Ergonomic Wireless Vertical Mouse",
+    "category": "Tech",
+    "brand": "Anker"
+  },
+  {
+    "id": "home-led-strip",
+    "price": 19.99,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. It makes rooms feel cooler instantly." },
+      { "type": "text", "value": "Feature: App-controlled colors." },
+      { "type": "text", "value": "Length: about 16ft." },
+      { "type": "text", "value": "Title: RGB LED Light Strip with Remote" }
+    ],
+    "title": "RGB LED Light Strip with Remote",
+    "category": "Home",
+    "brand": "Govee"
+  },
+  {
+    "id": "beauty-serum",
+    "price": 12.5,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. A tiny bottle with big promises." },
+      { "type": "text", "value": "Feature: Hydration + glow." },
+      { "type": "text", "value": "Contains: hyaluronic acid." },
+      { "type": "text", "value": "Title: Hydrating Hyaluronic Face Serum" }
+    ],
+    "title": "Hydrating Hyaluronic Face Serum",
+    "category": "Beauty",
+    "brand": "The Ordinary"
+  },
+  {
+    "id": "tools-bit-set",
+    "price": 24.99,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Small pieces that save big headaches." },
+      { "type": "text", "value": "Feature: Magnetic holder included." },
+      { "type": "text", "value": "Set size: 100+ pieces." },
+      { "type": "text", "value": "Title: Precision Screwdriver Bit Set" }
+    ],
+    "title": "Precision Screwdriver Bit Set",
+    "category": "Tools",
+    "brand": "iFixit"
+  },
+  {
+    "id": "toys-brick-robot",
+    "price": 34.99,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. Pieces click together for hours." },
+      { "type": "text", "value": "Theme: A friendly helper." },
+      { "type": "text", "value": "Includes: 300+ bricks." },
+      { "type": "text", "value": "Title: Buildable Mini Robot Kit" }
+    ],
+    "title": "Buildable Mini Robot Kit",
+    "category": "Toys",
+    "brand": "LEGO"
+  },
+
+  {
+    "id": "kitchen-airfryer-liners",
+    "price": 9.99,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. Cleanup gets easier." },
+      { "type": "text", "value": "Material: paper, non-stick." },
+      { "type": "text", "value": "Quantity: 100 pack." },
+      { "type": "text", "value": "Title: Disposable Air Fryer Paper Liners" }
+    ],
+    "title": "Disposable Air Fryer Paper Liners",
+    "category": "Kitchen",
+    "brand": "Katbite"
+  },
+  {
+    "id": "tech-usb-c-hub",
+    "price": 27.49,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. One port becomes many." },
+      { "type": "text", "value": "Feature: HDMI output." },
+      { "type": "text", "value": "Includes: USB-A, SD, PD charging." },
+      { "type": "text", "value": "Title: 6-in-1 USB-C Hub Adapter" }
+    ],
+    "title": "6-in-1 USB-C Hub Adapter",
+    "category": "Tech",
+    "brand": "UGREEN"
+  },
+  {
+    "id": "home-throw-blanket",
+    "price": 16.99,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. Instant cozy." },
+      { "type": "text", "value": "Material: soft fleece." },
+      { "type": "text", "value": "Size: about 50x60 inches." },
+      { "type": "text", "value": "Title: Plush Fleece Throw Blanket" }
+    ],
+    "title": "Plush Fleece Throw Blanket",
+    "category": "Home",
+    "brand": "Bedsure"
+  },
+  {
+    "id": "beauty-mascara",
+    "price": 10.99,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. One swipe, bigger eyes." },
+      { "type": "text", "value": "Feature: volumizing + lengthening." },
+      { "type": "text", "value": "Water resistant." },
+      { "type": "text", "value": "Title: Volumizing Lash Mascara" }
+    ],
+    "title": "Volumizing Lash Mascara",
+    "category": "Beauty",
+    "brand": "Maybelline"
+  },
+  {
+    "id": "tools-tape-measure",
+    "price": 11.98,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Everyone owns one eventually." },
+      { "type": "text", "value": "Feature: auto-lock blade." },
+      { "type": "text", "value": "Length: 25ft." },
+      { "type": "text", "value": "Title: 25-Foot Locking Tape Measure" }
+    ],
+    "title": "25-Foot Locking Tape Measure",
+    "category": "Tools",
+    "brand": "Stanley"
+  },
+  {
+    "id": "toys-card-game",
+    "price": 14.99,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. Loud laughs in a small box." },
+      { "type": "text", "value": "Players: 2-6." },
+      { "type": "text", "value": "Fast rounds, take-that energy." },
+      { "type": "text", "value": "Title: Family Party Card Game" }
+    ],
+    "title": "Family Party Card Game",
+    "category": "Toys",
+    "brand": "Exploding Kittens"
+  },
+
+  {
+    "id": "kitchen-knife-sharpener",
+    "price": 18.49,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. Fixes dull mistakes." },
+      { "type": "text", "value": "Feature: 3-stage system." },
+      { "type": "text", "value": "Works for most straight-edge knives." },
+      { "type": "text", "value": "Title: 3-Stage Kitchen Knife Sharpener" }
+    ],
+    "title": "3-Stage Kitchen Knife Sharpener",
+    "category": "Kitchen",
+    "brand": "Chef'sChoice"
+  },
+  {
+    "id": "tech-noise-earbuds",
+    "price": 79.99,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. Silence, on demand." },
+      { "type": "text", "value": "Feature: active noise canceling." },
+      { "type": "text", "value": "Battery: 20+ hours with case." },
+      { "type": "text", "value": "Title: Wireless Noise Cancelling Earbuds" }
+    ],
+    "title": "Wireless Noise Cancelling Earbuds",
+    "category": "Tech",
+    "brand": "Soundcore"
+  },
+  {
+    "id": "home-door-mat",
+    "price": 13.49,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. It judges your shoes." },
+      { "type": "text", "value": "Material: coir + rubber backing." },
+      { "type": "text", "value": "Size: about 18x30 inches." },
+      { "type": "text", "value": "Title: Durable Outdoor Doormat" }
+    ],
+    "title": "Durable Outdoor Doormat",
+    "category": "Home",
+    "brand": "A1HC"
+  },
+  {
+    "id": "beauty-hair-dryer",
+    "price": 39.99,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. Morning time machine." },
+      { "type": "text", "value": "Feature: ionic airflow." },
+      { "type": "text", "value": "Includes: diffuser + concentrator." },
+      { "type": "text", "value": "Title: Ionic Hair Dryer with Diffuser" }
+    ],
+    "title": "Ionic Hair Dryer with Diffuser",
+    "category": "Beauty",
+    "brand": "Revlon"
+  },
+  {
+    "id": "tools-safety-glasses",
+    "price": 8.99,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Protect the irreplaceable." },
+      { "type": "text", "value": "Feature: anti-fog coating." },
+      { "type": "text", "value": "ANSI-rated." },
+      { "type": "text", "value": "Title: Anti-Fog Safety Glasses" }
+    ],
+    "title": "Anti-Fog Safety Glasses",
+    "category": "Tools",
+    "brand": "DEWALT"
+  },
+  {
+    "id": "toys-plush-dino",
+    "price": 22.0,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. Soft, stubbornly adorable." },
+      { "type": "text", "value": "Feature: weighted belly." },
+      { "type": "text", "value": "Size: about 16 inches." },
+      { "type": "text", "value": "Title: Weighted Plush Dinosaur" }
+    ],
+    "title": "Weighted Plush Dinosaur",
+    "category": "Toys",
+    "brand": "Warmies"
+  },
+
+  {
+    "id": "kitchen-cutting-board",
+    "price": 21.95,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. A quiet workhorse." },
+      { "type": "text", "value": "Material: bamboo." },
+      { "type": "text", "value": "Has a juice groove." },
+      { "type": "text", "value": "Title: Bamboo Cutting Board with Juice Groove" }
+    ],
+    "title": "Bamboo Cutting Board with Juice Groove",
+    "category": "Kitchen",
+    "brand": "Greener Chef"
+  },
+  {
+    "id": "tech-keyboard-mech",
+    "price": 89.0,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. Clicks that feel expensive." },
+      { "type": "text", "value": "Feature: hot-swappable switches." },
+      { "type": "text", "value": "Layout: 75% compact." },
+      { "type": "text", "value": "Title: Mechanical Keyboard (Hot-Swappable, 75%)" }
+    ],
+    "title": "Mechanical Keyboard (Hot-Swappable, 75%)",
+    "category": "Tech",
+    "brand": "Keychron"
+  },
+  {
+    "id": "home-scented-candles",
+    "price": 17.99,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. Mood in a jar." },
+      { "type": "text", "value": "Feature: soy blend." },
+      { "type": "text", "value": "Set: 4 small tins." },
+      { "type": "text", "value": "Title: Scented Candle Gift Set (4-Pack)" }
+    ],
+    "title": "Scented Candle Gift Set (4-Pack)",
+    "category": "Home",
+    "brand": "Chesapeake Bay"
+  },
+  {
+    "id": "beauty-electric-toothbrush",
+    "price": 49.99,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. Dentist-approved vibes." },
+      { "type": "text", "value": "Feature: pressure sensor." },
+      { "type": "text", "value": "Timer: 2 minutes with quad pacing." },
+      { "type": "text", "value": "Title: Rechargeable Electric Toothbrush with Pressure Sensor" }
+    ],
+    "title": "Rechargeable Electric Toothbrush with Pressure Sensor",
+    "category": "Beauty",
+    "brand": "Oral-B"
+  },
+  {
+    "id": "tools-stud-finder",
+    "price": 29.99,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Helps you avoid expensive holes." },
+      { "type": "text", "value": "Feature: detects wood + metal." },
+      { "type": "text", "value": "Has an LCD display." },
+      { "type": "text", "value": "Title: Digital Stud Finder with LCD" }
+    ],
+    "title": "Digital Stud Finder with LCD",
+    "category": "Tools",
+    "brand": "Zircon"
+  },
+  {
+    "id": "toys-rc-car",
+    "price": 59.99,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. Fast chaos on the floor." },
+      { "type": "text", "value": "Feature: 2.4GHz remote." },
+      { "type": "text", "value": "Battery: 20 minutes per charge." },
+      { "type": "text", "value": "Title: Remote Control Off-Road Car" }
+    ],
+    "title": "Remote Control Off-Road Car",
+    "category": "Toys",
+    "brand": "HAIBOXING"
+  },
+
+  {
+    "id": "kitchen-digital-scale",
+    "price": 14.99,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. Precision for the picky." },
+      { "type": "text", "value": "Feature: grams/ounces toggle." },
+      { "type": "text", "value": "Max: 11lb capacity." },
+      { "type": "text", "value": "Title: Digital Kitchen Food Scale (11lb)" }
+    ],
+    "title": "Digital Kitchen Food Scale (11lb)",
+    "category": "Kitchen",
+    "brand": "Etekcity"
+  },
+  {
+    "id": "tech-power-bank",
+    "price": 39.99,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. Your phone’s second breakfast." },
+      { "type": "text", "value": "Feature: USB-C fast charging." },
+      { "type": "text", "value": "Capacity: 20,000mAh." },
+      { "type": "text", "value": "Title: 20,000mAh USB-C Power Bank (Fast Charge)" }
+    ],
+    "title": "20,000mAh USB-C Power Bank (Fast Charge)",
+    "category": "Tech",
+    "brand": "Anker"
+  },
+  {
+    "id": "home-shower-caddy",
+    "price": 23.99,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. Tames bottle chaos." },
+      { "type": "text", "value": "Feature: rustproof metal." },
+      { "type": "text", "value": "Mount: adhesive (no drilling)." },
+      { "type": "text", "value": "Title: Rustproof Shower Caddy (No-Drill)" }
+    ],
+    "title": "Rustproof Shower Caddy (No-Drill)",
+    "category": "Home",
+    "brand": "YASONIC"
+  },
+  {
+    "id": "beauty-makeup-sponges",
+    "price": 7.49,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. Bounce, blend, repeat." },
+      { "type": "text", "value": "Feature: latex-free." },
+      { "type": "text", "value": "Pack: 6 sponges." },
+      { "type": "text", "value": "Title: Makeup Blending Sponge Set (6-Pack)" }
+    ],
+    "title": "Makeup Blending Sponge Set (6-Pack)",
+    "category": "Beauty",
+    "brand": "Real Techniques"
+  },
+  {
+    "id": "tools-headlamp",
+    "price": 19.99,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Hands-free light." },
+      { "type": "text", "value": "Feature: motion sensor toggle." },
+      { "type": "text", "value": "Rechargeable battery." },
+      { "type": "text", "value": "Title: Rechargeable LED Headlamp with Motion Sensor" }
+    ],
+    "title": "Rechargeable LED Headlamp with Motion Sensor",
+    "category": "Tools",
+    "brand": "LHKNL"
+  },
+  {
+    "id": "toys-puzzle-1000",
+    "price": 15.99,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. A weekend on the table." },
+      { "type": "text", "value": "Pieces: 1000." },
+      { "type": "text", "value": "Finished size: roughly poster-sized." },
+      { "type": "text", "value": "Title: 1000-Piece Scenic Jigsaw Puzzle" }
+    ],
+    "title": "1000-Piece Scenic Jigsaw Puzzle",
+    "category": "Toys",
+    "brand": "Ravensburger"
+  },
+
+  {
+    "id": "kitchen-silicone-spatula-set",
+    "price": 13.99,
+    "image": "/images/kitchen.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. Gentle on pans, tough on batter." },
+      { "type": "text", "value": "Material: silicone." },
+      { "type": "text", "value": "Heat resistant." },
+      { "type": "text", "value": "Title: Silicone Spatula Set (Heat Resistant)" }
+    ],
+    "title": "Silicone Spatula Set (Heat Resistant)",
+    "category": "Kitchen",
+    "brand": "GIR"
+  },
+  {
+    "id": "tech-webcam-1080p",
+    "price": 32.99,
+    "image": "/images/tech.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tech. For meetings you pretend to love." },
+      { "type": "text", "value": "Resolution: 1080p." },
+      { "type": "text", "value": "Has a privacy shutter." },
+      { "type": "text", "value": "Title: 1080p Webcam with Privacy Shutter" }
+    ],
+    "title": "1080p Webcam with Privacy Shutter",
+    "category": "Tech",
+    "brand": "Logitech"
+  },
+  {
+    "id": "home-humidifier",
+    "price": 44.99,
+    "image": "/images/home.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Home. Better air for dry days." },
+      { "type": "text", "value": "Feature: cool mist." },
+      { "type": "text", "value": "Tank: about 2-3 liters." },
+      { "type": "text", "value": "Title: Cool Mist Humidifier for Bedroom" }
+    ],
+    "title": "Cool Mist Humidifier for Bedroom",
+    "category": "Home",
+    "brand": "LEVOIT"
+  },
+  {
+    "id": "beauty-nail-kit",
+    "price": 18.99,
+    "image": "/images/beauty.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Beauty. Tiny tools, big satisfaction." },
+      { "type": "text", "value": "Feature: stainless steel tools." },
+      { "type": "text", "value": "Includes: clippers, file, tweezers." },
+      { "type": "text", "value": "Title: Manicure Pedicure Grooming Kit" }
+    ],
+    "title": "Manicure Pedicure Grooming Kit",
+    "category": "Beauty",
+    "brand": "MR.GREEN"
+  },
+  {
+    "id": "tools-level-laser",
+    "price": 49.99,
+    "image": "/images/tools.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Tools. Straight lines without eyeballing." },
+      { "type": "text", "value": "Feature: self-leveling." },
+      { "type": "text", "value": "Projects a cross line." },
+      { "type": "text", "value": "Title: Self-Leveling Cross Line Laser Level" }
+    ],
+    "title": "Self-Leveling Cross Line Laser Level",
+    "category": "Tools",
+    "brand": "BOSCH"
+  },
+  {
+    "id": "toys-magnetic-tiles",
+    "price": 39.99,
+    "image": "/images/toys.svg",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Toys. Shapes that snap into castles." },
+      { "type": "text", "value": "Feature: strong magnets." },
+      { "type": "text", "value": "Set: 60 tiles." },
+      { "type": "text", "value": "Title: Magnetic Building Tiles Set (60-Piece)" }
+    ],
+    "title": "Magnetic Building Tiles Set (60-Piece)",
+    "category": "Toys",
+    "brand": "MAGNA-TILES"
+  },
+  {
+    "id": "demo-realimg-insulated-bottle",
+    "price": 27.0,
+    "image": "/images/demo-water-bottle.png",
+    "clues": [
+      { "type": "image" },
+      { "type": "text", "value": "Category: Kitchen. It’s always with you, but it isn’t food." },
+      { "type": "text", "value": "Feature: double-wall insulation." },
+      { "type": "text", "value": "Matte black, stainless steel, around 24oz." },
+      { "type": "text", "value": "Title: Insulated Stainless Steel Water Bottle (Matte Black)" }
+    ],
+    "title": "Insulated Stainless Steel Water Bottle (Matte Black)",
+    "category": "Kitchen",
+    "brand": "PricePeek Demo"
+  }
+]
+
