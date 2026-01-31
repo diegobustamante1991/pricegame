@@ -47,3 +47,20 @@ export type PersistedStateV1 = {
   won: boolean
   onboardingSeen: boolean
 }
+
+export type PersistedStateV2 = {
+  v: 2
+  mode: GameMode
+  /** YYYY-MM-DD (local time) */
+  dayKey: string
+  productId: string
+  /** Amazon ASIN used for live random products (optional) */
+  productAsin?: string
+  guesses: GuessResult[]
+  revealedClues: number
+  finished: boolean
+  won: boolean
+  onboardingSeen: boolean
+}
+
+export type PersistedState = PersistedStateV1 | PersistedStateV2

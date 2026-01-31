@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Product } from '../types'
 
 type Props = {
@@ -7,6 +7,9 @@ type Props = {
 
 export function ProductCard({ product }: Props) {
   const [broken, setBroken] = useState(false)
+  useEffect(() => {
+    setBroken(false)
+  }, [product.image])
   const fallback =
     product.category === 'Tech'
       ? '/images/tech.svg'

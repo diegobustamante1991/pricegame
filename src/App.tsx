@@ -1,8 +1,9 @@
 import './App.css'
 import { useEffect, useMemo, useState } from 'react'
 import productsRaw from './data/products.json'
-import type { GameMode, GuessResult, PersistedStateV1, Product } from './types'
+import type { GameMode, GuessResult, PersistedStateV2, Product } from './types'
 import { fetchProductByAsin } from './api/product'
+import { REAL_ASIN_POOL } from './data/realAsins'
 import { GameHeader } from './components/GameHeader'
 import { ProductCard } from './components/ProductCard'
 import { ClueStack } from './components/ClueStack'
@@ -15,12 +16,14 @@ import { pickDeterministicIndex } from './utils/random'
 import { directionLabel, percentError, toleranceCheck, warmthLabel } from './utils/price'
 import { loadLeaderboard, loadState, saveLeaderboard, saveState } from './utils/storage'
 import { calculateScore } from './utils/score'
+import { buildLiveClues, buildLiveProduct } from './utils/liveProduct'
 
 const PRODUCTS = productsRaw as Product[]
 const MAX_TRIES = 5
 const LIVE_PRICE_FETCH_MS = 3000
+const LIVE_RANDOM_ENABLED = Boolean(import.meta.env.VITE_API_URL)
 
-function pickProduct(mode: GameMode, dayKey: string) {
+function pickStaticProduct(mode: GameMode, dayKey: string) {
   if (mode === 'daily') {
     const idx = pickDeterministicIndex(dayKey, PRODUCTS.length)
     return PRODUCTS[idx]
@@ -28,10 +31,29 @@ function pickProduct(mode: GameMode, dayKey: string) {
   return PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)]
 }
 
-function buildFreshState(mode: GameMode, dayKey: string, onboardingSeen: boolean): PersistedStateV1 {
-  const product = pickProduct(mode, dayKey)
+function pickRandomAsin() {
+  return REAL_ASIN_POOL[Math.floor(Math.random() * REAL_ASIN_POOL.length)]
+}
+
+function buildFreshState(mode: GameMode, dayKey: string, onboardingSeen: boolean): PersistedStateV2 {
+  if (mode === 'random' && LIVE_RANDOM_ENABLED) {
+    const asin = pickRandomAsin()
+    return {
+      v: 2,
+      mode,
+      dayKey,
+      productId: `live:${asin}`,
+      productAsin: asin,
+      guesses: [],
+      revealedClues: 1,
+      finished: false,
+      won: false,
+      onboardingSeen,
+    }
+  }
+  const product = pickStaticProduct(mode, dayKey)
   return {
-    v: 1,
+    v: 2,
     mode,
     dayKey,
     productId: product.id,
@@ -45,15 +67,16 @@ function buildFreshState(mode: GameMode, dayKey: string, onboardingSeen: boolean
 
 export default function App() {
   const todayKey = useMemo(() => getLocalDayKey(), [])
-  const [state, setState] = useState<PersistedStateV1>(() => {
+  const [state, setState] = useState<PersistedStateV2>(() => {
     const loaded = typeof window !== 'undefined' ? loadState() : null
     const onboardingSeen = loaded?.onboardingSeen ?? false
 
-    if (loaded && loaded.v === 1) {
+    if (loaded && loaded.v === 2) {
       // Daily mode: reset when the day changes
       if (loaded.mode === 'daily' && loaded.dayKey !== todayKey) {
         return buildFreshState('daily', todayKey, onboardingSeen)
       }
+      if (loaded.productAsin) return loaded
       // Ensure product exists; otherwise reset
       const exists = PRODUCTS.some((p) => p.id === loaded.productId)
       if (exists) return loaded
@@ -96,9 +119,10 @@ export default function App() {
   }, [state.finished, state.won, state.mode, state.dayKey, state.productId, state.guesses])
 
   const baseProduct = useMemo(() => {
+    if (state.productAsin) return buildLiveProduct(state.productAsin)
     const p = PRODUCTS.find((x) => x.id === state.productId)
     return p ?? PRODUCTS[0]
-  }, [state.productId])
+  }, [state.productId, state.productAsin])
 
   const [product, setProduct] = useState<Product>(baseProduct)
   const [priceLoading, setPriceLoading] = useState(false)
@@ -120,7 +144,15 @@ export default function App() {
         if (!cancelled && live && live.price > 0) {
           setProduct((prev) =>
             prev.id === productId
-              ? { ...prev, price: live.price, image: live.image || prev.image }
+              ? {
+                  ...prev,
+                  price: live.price,
+                  image: live.image || prev.image,
+                  title: live.title || prev.title,
+                  brand: live.brand || prev.brand,
+                  category: live.category || prev.category,
+                  clues: buildLiveClues(live),
+                }
               : prev
           )
         }
@@ -152,6 +184,7 @@ export default function App() {
       mode: 'random',
       dayKey: todayKey,
       productId: demo.id,
+      productAsin: undefined,
       guesses: [],
       revealedClues: 1,
       finished: false,
@@ -205,6 +238,7 @@ export default function App() {
       <GameHeader
         mode={state.mode}
         dayKey={todayKey}
+        liveEnabled={LIVE_RANDOM_ENABLED}
         onModeChange={(m) => startNew(m)}
         onNewRandom={() => startNew('random')}
         onDemo={startDemo}

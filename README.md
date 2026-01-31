@@ -72,6 +72,10 @@ Products can fetch **live prices from Amazon** via the [Rainforest API](https://
    - Set `VITE_API_URL=https://your-app.vercel.app` in your build env (or `.env`)
    - Products with an `asin` will fetch live prices before gameplay
 
+4. **Live randomizer** (optional):
+   - The app will pick **random real products** from `src/data/realAsins.ts` when `VITE_API_URL` is set
+   - Live product info (title/brand/category/price) is pulled from Rainforest before the round starts
+
 Without `VITE_API_URL` or `RAINFOREST_API_KEY`, the app uses static prices from `products.json`.
 
 ### Deploy (Vercel)

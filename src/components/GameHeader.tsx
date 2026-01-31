@@ -3,13 +3,22 @@ import type { GameMode } from '../types'
 type Props = {
   mode: GameMode
   dayKey: string
+  liveEnabled: boolean
   onModeChange: (mode: GameMode) => void
   onNewRandom: () => void
   onDemo: () => void
   onOpenHelp: () => void
 }
 
-export function GameHeader({ mode, dayKey, onModeChange, onNewRandom, onDemo, onOpenHelp }: Props) {
+export function GameHeader({
+  mode,
+  dayKey,
+  liveEnabled,
+  onModeChange,
+  onNewRandom,
+  onDemo,
+  onOpenHelp,
+}: Props) {
   return (
     <header className="header">
       <div className="brand">
@@ -18,7 +27,13 @@ export function GameHeader({ mode, dayKey, onModeChange, onNewRandom, onDemo, on
         </div>
         <div>
           <div className="brandName">PricePeek</div>
-          <div className="brandSub">{mode === 'daily' ? `Daily • ${dayKey}` : 'Random mode'}</div>
+          <div className="brandSub">
+            {mode === 'daily'
+              ? `Daily • ${dayKey}`
+              : liveEnabled
+                ? 'Random • Live Amazon'
+                : 'Random mode'}
+          </div>
         </div>
       </div>
 

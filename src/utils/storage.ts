@@ -1,6 +1,7 @@
-import type { PersistedStateV1 } from '../types'
+import type { PersistedState, PersistedStateV1, PersistedStateV2 } from '../types'
 
-const KEY = 'pricepeek:v1'
+const KEY_V1 = 'pricepeek:v1'
+const KEY_V2 = 'pricepeek:v2'
 const LEADERBOARD_KEY = 'pricepeek:leaderboard:v1'
 
 export type LeaderboardEntry = {
@@ -11,21 +12,36 @@ export type LeaderboardEntry = {
   at: number
 }
 
-export function loadState(): PersistedStateV1 | null {
+export function loadState(): PersistedStateV2 | null {
   try {
-    const raw = localStorage.getItem(KEY)
-    if (!raw) return null
-    const parsed = JSON.parse(raw) as PersistedStateV1
-    if (!parsed || parsed.v !== 1) return null
-    return parsed
+    const rawV2 = localStorage.getItem(KEY_V2)
+    if (rawV2) {
+      const parsed = JSON.parse(rawV2) as PersistedState
+      if (parsed && parsed.v === 2) return parsed
+    }
+    const rawV1 = localStorage.getItem(KEY_V1)
+    if (!rawV1) return null
+    const parsedV1 = JSON.parse(rawV1) as PersistedStateV1
+    if (!parsedV1 || parsedV1.v !== 1) return null
+    return {
+      v: 2,
+      mode: parsedV1.mode,
+      dayKey: parsedV1.dayKey,
+      productId: parsedV1.productId,
+      guesses: parsedV1.guesses,
+      revealedClues: parsedV1.revealedClues,
+      finished: parsedV1.finished,
+      won: parsedV1.won,
+      onboardingSeen: parsedV1.onboardingSeen,
+    }
   } catch {
     return null
   }
 }
 
-export function saveState(state: PersistedStateV1) {
+export function saveState(state: PersistedStateV2) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(state))
+    localStorage.setItem(KEY_V2, JSON.stringify(state))
   } catch {
     // ignore
   }
@@ -33,7 +49,7 @@ export function saveState(state: PersistedStateV1) {
 
 export function clearState() {
   try {
-    localStorage.removeItem(KEY)
+    localStorage.removeItem(KEY_V2)
   } catch {
     // ignore
   }
