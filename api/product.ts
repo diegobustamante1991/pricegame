@@ -13,6 +13,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!asin) {
     return res.status(400).json({ error: 'Missing required query: asin' })
   }
+  const domain =
+    (typeof req.query.amazon_domain === 'string' ? req.query.amazon_domain.trim() : '') ||
+    process.env.RAINFOREST_AMAZON_DOMAIN ||
+    'amazon.com'
 
   const apiKey = process.env.RAINFOREST_API_KEY
   if (!apiKey) {
@@ -41,7 +45,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const params = new URLSearchParams({
       api_key: apiKey,
       type: 'product',
-      amazon_domain: 'amazon.com',
+      amazon_domain: domain,
       asin,
     })
 

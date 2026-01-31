@@ -1,22 +1,28 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import type { GuessResult } from '../types'
+import { warmthEmoji } from '../utils/price'
 
 type Props = {
   disabled?: boolean
   onSubmit: (value: number) => void
+  guesses: GuessResult[]
+  max?: number
+  resetKey?: string
 }
 
-function parseMoney(raw: string) {
-  const cleaned = raw.replace(/[^0-9.]/g, '')
-  if (!cleaned) return NaN
-  const n = Number(cleaned)
-  if (!Number.isFinite(n)) return NaN
-  return Math.round(n * 100) / 100
-}
+const MIN_PRICE = 1
+const DEFAULT_MAX = 300
+const STEP = 0.5
 
-export function GuessInput({ disabled, onSubmit }: Props) {
-  const [raw, setRaw] = useState('')
+export function GuessInput({ disabled, onSubmit, guesses, max = DEFAULT_MAX, resetKey }: Props) {
+  const lastGuess = guesses[guesses.length - 1]?.guess
+  const initialValue = useMemo(() => {
+    const fallback = Number.isFinite(lastGuess) ? Number(lastGuess) : 50
+    return Math.min(Math.max(fallback, MIN_PRICE), max)
+  }, [lastGuess, max])
+
+  const [value, setValue] = useState(initialValue)
   const [shake, setShake] = useState(false)
-  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     if (!shake) return
@@ -24,39 +30,52 @@ export function GuessInput({ disabled, onSubmit }: Props) {
     return () => window.clearTimeout(t)
   }, [shake])
 
-  const parsed = useMemo(() => parseMoney(raw), [raw])
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue, resetKey])
 
   function submit() {
     if (disabled) return
-    if (!Number.isFinite(parsed) || parsed <= 0) {
+    if (!Number.isFinite(value) || value <= 0) {
       setShake(true)
-      inputRef.current?.focus()
       return
     }
-    onSubmit(parsed)
-    setRaw('')
-    inputRef.current?.focus()
+    onSubmit(Math.round(value * 100) / 100)
   }
 
   return (
     <div className={`guessRow ${shake ? 'shake' : ''}`}>
-      <div className="moneyInput">
-        <span className="moneyPrefix" aria-hidden="true">
-          $
-        </span>
-        <input
-          ref={inputRef}
-          className="moneyField"
-          inputMode="decimal"
-          placeholder="Enter a price…"
-          value={raw}
-          disabled={disabled}
-          aria-label="Enter a price in dollars"
-          onChange={(e) => setRaw(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') submit()
-          }}
-        />
+      <div className="sliderCard">
+        <div className="sliderHeader">
+          <span className="sliderValue">${value.toFixed(2)}</span>
+          <span className="sliderRange">
+            ${MIN_PRICE}–${max}
+          </span>
+        </div>
+        <div className="sliderTrack">
+          <input
+            type="range"
+            className="priceSlider"
+            min={MIN_PRICE}
+            max={max}
+            step={STEP}
+            value={value}
+            disabled={disabled}
+            aria-label="Set a price in dollars"
+            onChange={(e) => setValue(Number(e.target.value))}
+          />
+          <div className="sliderMarkers" aria-hidden="true">
+            {guesses.map((guess, idx) => {
+              const ratio = (guess.guess - MIN_PRICE) / (max - MIN_PRICE)
+              const left = Math.min(100, Math.max(0, ratio * 100))
+              return (
+                <span key={`${idx}-${guess.guess}`} className="sliderMarker" style={{ left: `${left}%` }}>
+                  {warmthEmoji(guess.warmth)}
+                </span>
+              )
+            })}
+          </div>
+        </div>
       </div>
       <button type="button" className="primaryBtn" onClick={submit} disabled={disabled}>
         Guess

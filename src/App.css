@@ -137,6 +137,20 @@
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
+.productLayout {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.productPane,
+.cluePane {
+  display: grid;
+  gap: 10px;
+}
+
 .triesRow {
   display: flex;
   gap: 8px;
@@ -181,7 +195,7 @@
 }
 
 .clueStack {
-  margin-top: 14px;
+  margin-top: 0;
   display: grid;
   gap: 10px;
 }
@@ -281,6 +295,80 @@
   grid-template-columns: 1fr auto;
   gap: 10px;
   align-items: center;
+}
+
+.sliderCard {
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px 12px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.sliderValue {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.sliderRange {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sliderTrack {
+  position: relative;
+  margin-top: 8px;
+  padding: 8px 0;
+}
+
+.priceSlider {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.priceSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.7), rgba(167, 139, 250, 0.7));
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.priceSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.7), rgba(167, 139, 250, 0.7));
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.sliderMarkers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sliderMarker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
 }
 
 .moneyInput {
@@ -600,6 +688,9 @@
 }
 
 @media (max-width: 640px) {
+  .productLayout {
+    grid-template-columns: 1fr;
+  }
   .history {
     grid-template-columns: 1fr;
   }

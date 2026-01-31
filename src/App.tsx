@@ -253,14 +253,19 @@ export default function App() {
             ))}
           </div>
 
-          <ProductCard product={product} />
-          {priceLoading && (
-            <div className="priceLoadingHint" role="status">
-              Loading live price…
+          <div className="productLayout">
+            <div className="productPane">
+              <ProductCard product={product} />
+              {priceLoading && (
+                <div className="priceLoadingHint" role="status">
+                  Loading live price…
+                </div>
+              )}
             </div>
-          )}
-
-          <ClueStack clues={product.clues} revealed={state.revealedClues} />
+            <div className="cluePane">
+              <ClueStack clues={product.clues} revealed={state.revealedClues} />
+            </div>
+          </div>
 
           <div className="feedbackRow">
             {state.guesses.length > 0 ? (
@@ -295,7 +300,13 @@ export default function App() {
             )}
           </div>
 
-          <GuessInput disabled={!canGuess} onSubmit={onGuess} />
+          <GuessInput
+            disabled={!canGuess}
+            onSubmit={onGuess}
+            guesses={state.guesses}
+            resetKey={product.id}
+            max={300}
+          />
 
           <GuessHistory guesses={state.guesses} />
         </div>
