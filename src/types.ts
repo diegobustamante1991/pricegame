@@ -15,6 +15,8 @@ export type Product = {
   title: string
   category: string
   brand: string
+  /** Amazon ASIN for live price fetching (optional) */
+  asin?: string
 }
 
 export type Warmth =

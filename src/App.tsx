@@ -2,6 +2,7 @@ import './App.css'
 import { useEffect, useMemo, useState } from 'react'
 import productsRaw from './data/products.json'
 import type { GameMode, GuessResult, PersistedStateV1, Product } from './types'
+import { fetchProductByAsin } from './api/product'
 import { GameHeader } from './components/GameHeader'
 import { ProductCard } from './components/ProductCard'
 import { ClueStack } from './components/ClueStack'
@@ -17,6 +18,7 @@ import { calculateScore } from './utils/score'
 
 const PRODUCTS = productsRaw as Product[]
 const MAX_TRIES = 5
+const LIVE_PRICE_FETCH_MS = 3000
 
 function pickProduct(mode: GameMode, dayKey: string) {
   if (mode === 'daily') {
@@ -93,10 +95,45 @@ export default function App() {
     }
   }, [state.finished, state.won, state.mode, state.dayKey, state.productId, state.guesses])
 
-  const product = useMemo(() => {
+  const baseProduct = useMemo(() => {
     const p = PRODUCTS.find((x) => x.id === state.productId)
     return p ?? PRODUCTS[0]
   }, [state.productId])
+
+  const [product, setProduct] = useState<Product>(baseProduct)
+  const [priceLoading, setPriceLoading] = useState(false)
+
+  useEffect(() => {
+    const productId = baseProduct.id
+    setProduct(baseProduct)
+    if (!baseProduct.asin) {
+      setPriceLoading(false)
+      return
+    }
+    setPriceLoading(true)
+    let cancelled = false
+    const t = setTimeout(() => {
+      if (!cancelled) setPriceLoading(false)
+    }, LIVE_PRICE_FETCH_MS)
+    fetchProductByAsin(baseProduct.asin)
+      .then((live) => {
+        if (!cancelled && live && live.price > 0) {
+          setProduct((prev) =>
+            prev.id === productId
+              ? { ...prev, price: live.price, image: live.image || prev.image }
+              : prev
+          )
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setPriceLoading(false)
+      })
+    return () => {
+      cancelled = true
+      clearTimeout(t)
+    }
+  }, [baseProduct.id, baseProduct.asin])
 
   const triesUsed = state.guesses.length
   const triesLeft = Math.max(0, MAX_TRIES - triesUsed)
@@ -161,7 +198,7 @@ export default function App() {
   }
 
   const showOnboarding = !state.onboardingSeen
-  const canGuess = !state.finished && triesLeft > 0
+  const canGuess = !state.finished && triesLeft > 0 && !priceLoading
 
   return (
     <div className="appShell">
@@ -183,6 +220,11 @@ export default function App() {
           </div>
 
           <ProductCard product={product} />
+          {priceLoading && (
+            <div className="priceLoadingHint" role="status">
+              Loading live price…
+            </div>
+          )}
 
           <ClueStack clues={product.clues} revealed={state.revealedClues} />
 

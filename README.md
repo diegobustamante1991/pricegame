@@ -54,12 +54,40 @@ npm test
 npm run test:run
 ```
 
-### Deploy (Netlify/Vercel)
+### Amazon live prices (optional)
 
-This is a static Vite app:
+Products can fetch **live prices from Amazon** via the [Rainforest API](https://www.rainforestapi.com/):
+
+1. **Add an `asin`** to any product in `products.json`:
+   ```json
+   { "id": "demo-realimg-insulated-bottle", "asin": "B0BQJ8L7M8", "price": 27.0, ... }
+   ```
+
+2. **Deploy the API** (e.g. to Vercel):
+   - The `api/product.ts` serverless function keeps your Rainforest API key **server-side**
+   - Add `RAINFOREST_API_KEY` in your hosting env (Vercel → Settings → Environment Variables)
+   - Deploy; the API will be at `https://your-app.vercel.app/api/product?asin=XXX`
+
+3. **Point the frontend** at the API:
+   - Set `VITE_API_URL=https://your-app.vercel.app` in your build env (or `.env`)
+   - Products with an `asin` will fetch live prices before gameplay
+
+Without `VITE_API_URL` or `RAINFOREST_API_KEY`, the app uses static prices from `products.json`.
+
+### Deploy (Vercel)
+
+**Recommended** for API + frontend:
+
+- **Build command**: `npm run build`
+- **Output directory**: `dist`
+- **Env**: `RAINFOREST_API_KEY` (optional, for live prices)
+- **Env**: `VITE_API_URL` = your deployment URL (e.g. `https://pricepeek.vercel.app`) if using live prices
+
+### Deploy (Amplify / static only)
 
 - **Build command**: `npm run build`
 - **Publish directory**: `dist`
+- Deploy the API separately (e.g. Vercel) and set `VITE_API_URL` to that URL.
 
 ### Assumptions
 

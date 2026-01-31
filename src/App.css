@@ -239,6 +239,13 @@
   color: var(--muted);
 }
 
+.priceLoadingHint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+
 .feedbackPill {
   border: 1px solid var(--stroke);
   background: rgba(255, 255, 255, 0.05);
