@@ -1,4 +1,5 @@
 import type { Clue } from '../types'
+import { LABELS } from '../content'
 
 type Props = {
   clues: Clue[]
@@ -7,16 +8,16 @@ type Props = {
 
 export function ClueStack({ clues, revealed }: Props) {
   return (
-    <section className="clueStack" aria-label="Clues">
+    <section className="clueStack" aria-label={LABELS.clues}>
       {clues.map((clue, idx) => {
         const isUnlocked = idx < revealed
-        const label = `Clue ${idx + 1}`
+        const label = LABELS.clue(idx + 1)
 
         if (!isUnlocked) {
           return (
-            <div key={idx} className="clue locked" aria-label={`${label} locked`}>
+            <div key={idx} className="clue locked" aria-label={LABELS.clueLockedAria(label)}>
               <div className="clueTitle">{label}</div>
-              <div className="clueBody lockedBody">Locked</div>
+              <div className="clueBody lockedBody">{LABELS.clueLocked}</div>
             </div>
           )
         }
@@ -25,7 +26,7 @@ export function ClueStack({ clues, revealed }: Props) {
           return (
             <div key={idx} className="clue unlocked" aria-label={label}>
               <div className="clueTitle">{label}</div>
-              <div className="clueBody">Image revealed above.</div>
+              <div className="clueBody">{LABELS.clueImage}</div>
             </div>
           )
         }

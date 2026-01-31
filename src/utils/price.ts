@@ -1,4 +1,5 @@
 import type { Warmth } from '../types'
+import { WARMTH } from '../content'
 
 export const DEFAULT_TOLERANCE_PERCENT = 0.03
 export const MIN_TOLERANCE_DOLLARS = 1
@@ -29,38 +30,11 @@ export function warmthLabel(pErr: number, withinTolerance: boolean): Warmth {
 }
 
 export function warmthText(w: Warmth) {
-  switch (w) {
-    case 'correct':
-      return 'Correct'
-    case 'ice':
-      return 'Ice Cold'
-    case 'cold':
-      return 'Cold'
-    case 'warm':
-      return 'Warm'
-    case 'hot':
-      return 'Hot'
-    case 'scorching':
-      return 'Scorching'
-  }
+  return WARMTH.text[w]
 }
 
 export function warmthEmoji(w: Warmth) {
-  // Emoji scale (no color squares)
-  switch (w) {
-    case 'correct':
-      return '🎯'
-    case 'ice':
-      return '🧊'
-    case 'cold':
-      return '🥶'
-    case 'warm':
-      return '🙂'
-    case 'hot':
-      return '🔥'
-    case 'scorching':
-      return '🌋'
-  }
+  return WARMTH.emoji[w]
 }
 
 export function directionLabel(guess: number, actual: number) {

@@ -1,3 +1,5 @@
+import { BUTTONS, HELP, LABELS } from '../content'
+
 type Props = {
   open: boolean
   onClose: () => void
@@ -6,40 +8,24 @@ type Props = {
 export function OnboardingModal({ open, onClose }: Props) {
   if (!open) return null
   return (
-    <div className="modalOverlay" role="dialog" aria-modal="true" aria-label="How to play">
+    <div className="modalOverlay" role="dialog" aria-modal="true" aria-label={HELP.header}>
       <div className="modal">
         <div className="modalHeader">
-          <div className="modalTitle">How to play</div>
-          <button type="button" className="iconBtn" onClick={onClose} aria-label="Close help">
+          <div className="modalTitle">{HELP.header}</div>
+          <button type="button" className="iconBtn" onClick={onClose} aria-label={LABELS.helpClose}>
             ✕
           </button>
         </div>
         <div className="modalBody">
-          <div className="helpGrid">
-            <div className="helpCard">
-              <div className="helpTitle">Goal</div>
-              <div className="helpText">Guess the product’s price in USD within 5 tries.</div>
-            </div>
-            <div className="helpCard">
-              <div className="helpTitle">Clues</div>
-              <div className="helpText">
-                Start with the image only. Each wrong guess unlocks another clue.
-              </div>
-            </div>
-            <div className="helpCard">
-              <div className="helpTitle">Feedback</div>
-              <div className="helpText">
-                You’ll see <b>Higher</b>/<b>Lower</b> plus a warmth rating based on how close you are.
-              </div>
-            </div>
-            <div className="helpCard">
-              <div className="helpTitle">Win tolerance</div>
-              <div className="helpText">You win if you’re within ±3% (minimum ±$1).</div>
-            </div>
-          </div>
-
+          <ul className="helpList">
+            {HELP.bullets.map((item) => (
+              <li key={item} className="helpListItem">
+                {item}
+              </li>
+            ))}
+          </ul>
           <button type="button" className="primaryBtn" onClick={onClose}>
-            Let’s play
+            {BUTTONS.start}
           </button>
         </div>
       </div>

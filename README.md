@@ -1,16 +1,16 @@
-## PricePeek
+## peekle
 
-A housle-style price guessing game, but for Amazon-like products (local dataset only). Guess the price in USD within 5 tries; each wrong guess unlocks another clue.
+You’re in a pickle. Guess the price in 5 tries.
 
 ### Gameplay
 
 - **Goal**: Guess the product price in USD within **5 tries**
 - **Clues**: Start with **image only**; each wrong guess reveals the next clue (up to 5)
-- **Feedback**: “Higher/Lower” plus a **warmth** rating based on percent error
+- **Feedback**: “Too spicy / too mild” plus a **warmth** rating
 - **Win tolerance**: **±3% (minimum ±$1)** so it’s playable
 - **Modes**:
   - **Daily**: deterministically picks the same product for a given local date
-  - **Random**: picks a random product each round (use “New” to reroll)
+  - **Random**: picks a random product each round (use “Next pickle” to reroll)
 - **Persistence**: round state is saved in `localStorage` (refresh won’t lose progress)
 
 ### Tech
@@ -60,7 +60,7 @@ Products can fetch **live prices from Amazon** via the [Rainforest API](https://
 
 1. **Add an `asin`** to any product in `products.json`:
    ```json
-   { "id": "demo-realimg-insulated-bottle", "asin": "B0BQJ8L7M8", "price": 27.0, ... }
+   { "id": "demo-realimg-insulated-bottle", "asin": "B073JYC4XM", "price": 27.0, ... }
    ```
 
 2. **Deploy the API** (e.g. to Vercel):
@@ -86,7 +86,7 @@ Without `VITE_API_URL` or `RAINFOREST_API_KEY`, the app uses static prices from 
 - **Build command**: `npm run build`
 - **Output directory**: `dist`
 - **Env**: `RAINFOREST_API_KEY` (optional, for live prices)
-- **Env**: `VITE_API_URL` = your deployment URL (e.g. `https://pricepeek.vercel.app`) if using live prices
+- **Env**: `VITE_API_URL` = your deployment URL (e.g. `https://peekle.vercel.app`) if using live prices
 
 ### Deploy (Amplify / static only)
 

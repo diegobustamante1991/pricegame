@@ -13,10 +13,11 @@ import { ResultsModal } from './components/ResultsModal'
 import { OnboardingModal } from './components/OnboardingModal'
 import { getLocalDayKey } from './utils/date'
 import { pickDeterministicIndex } from './utils/random'
-import { directionLabel, percentError, toleranceCheck, warmthLabel } from './utils/price'
+import { directionLabel, percentError, toleranceCheck, warmthEmoji, warmthLabel, warmthText } from './utils/price'
 import { loadLeaderboard, loadState, saveLeaderboard, saveState } from './utils/storage'
 import { calculateScore } from './utils/score'
 import { buildLiveClues, buildLiveProduct } from './utils/liveProduct'
+import { LABELS, STATES } from './content'
 
 const PRODUCTS = productsRaw as Product[]
 const MAX_TRIES = 5
@@ -98,9 +99,9 @@ export default function App() {
   useEffect(() => {
     if (!state.finished || !state.won) return
     // push into local leaderboard (top 3 displayed), de-dupe by round signature
-    const sig = `pp:${state.mode}:${state.dayKey}:${state.productId}:${state.guesses.length}`
+    const sig = `pk:${state.mode}:${state.dayKey}:${state.productId}:${state.guesses.length}`
     try {
-      const lastSig = localStorage.getItem('pricepeek:lastWinSig')
+      const lastSig = localStorage.getItem('peekle:lastWinSig')
       if (lastSig === sig) return
       const score = calculateScore(state.guesses, true)
       const entries = loadLeaderboard()
@@ -112,7 +113,7 @@ export default function App() {
         at: Date.now(),
       })
       saveLeaderboard(entries)
-      localStorage.setItem('pricepeek:lastWinSig', sig)
+      localStorage.setItem('peekle:lastWinSig', sig)
     } catch {
       // ignore
     }
@@ -237,8 +238,6 @@ export default function App() {
     <div className="appShell">
       <GameHeader
         mode={state.mode}
-        dayKey={todayKey}
-        liveEnabled={LIVE_RANDOM_ENABLED}
         onModeChange={(m) => startNew(m)}
         onNewRandom={() => startNew('random')}
         onDemo={startDemo}
@@ -247,7 +246,7 @@ export default function App() {
 
       <main className="main">
         <div className="centerCard">
-          <div className="triesRow" aria-label={`Remaining tries: ${triesLeft}`}>
+          <div className="triesRow" aria-label={LABELS.remainingTries(triesLeft)}>
             {Array.from({ length: MAX_TRIES }).map((_, i) => (
               <div key={i} className={`tryDot ${i < triesUsed ? 'filled' : ''}`} />
             ))}
@@ -258,7 +257,7 @@ export default function App() {
               <ProductCard product={product} />
               {priceLoading && (
                 <div className="priceLoadingHint" role="status">
-                  Loading live price…
+                  {STATES.loading}
                 </div>
               )}
             </div>
@@ -270,33 +269,24 @@ export default function App() {
           <div className="feedbackRow">
             {state.guesses.length > 0 ? (
               <div className="feedbackPill">
-                <span className="feedbackLabel">Last:</span>
+                <span className="feedbackLabel">{LABELS.last}:</span>
                 <span className="feedbackValue">
                   {state.guesses[state.guesses.length - 1].direction === 'correct'
-                    ? 'Correct'
+                    ? STATES.win
                     : state.guesses[state.guesses.length - 1].direction === 'higher'
-                      ? 'Higher'
-                      : 'Lower'}
+                      ? STATES.tooLow
+                      : STATES.tooHigh}
                 </span>
                 <span className="feedbackDot" aria-hidden="true">
                   •
                 </span>
                 <span className="feedbackWarmth">
-                  {state.guesses[state.guesses.length - 1].warmth === 'correct'
-                    ? '🎯'
-                    : state.guesses[state.guesses.length - 1].warmth === 'ice'
-                      ? 'Ice Cold'
-                      : state.guesses[state.guesses.length - 1].warmth === 'cold'
-                        ? 'Cold'
-                        : state.guesses[state.guesses.length - 1].warmth === 'warm'
-                          ? 'Warm'
-                          : state.guesses[state.guesses.length - 1].warmth === 'hot'
-                            ? 'Hot'
-                            : 'Scorching'}
+                  {warmthEmoji(state.guesses[state.guesses.length - 1].warmth)}{' '}
+                  {warmthText(state.guesses[state.guesses.length - 1].warmth)}
                 </span>
               </div>
             ) : (
-              <div className="feedbackHint">Make a guess to unlock clues.</div>
+              <div className="feedbackHint">{LABELS.feedbackHint}</div>
             )}
           </div>
 
@@ -314,7 +304,6 @@ export default function App() {
 
       <ResultsModal
         open={showResults}
-        mode={state.mode}
         dayKey={todayKey}
         product={product}
         guesses={state.guesses}

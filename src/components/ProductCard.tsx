@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Product } from '../types'
+import { APP, LABELS } from '../content'
 
 type Props = {
   product: Product
@@ -30,7 +31,7 @@ export function ProductCard({ product }: Props) {
         <img
           className="productImage"
           src={src}
-          alt="Mystery product"
+          alt={`${APP.name} ${LABELS.productAlt}`}
           onError={() => setBroken(true)}
         />
       </div>

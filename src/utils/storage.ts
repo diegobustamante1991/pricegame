@@ -1,8 +1,8 @@
 import type { PersistedState, PersistedStateV1, PersistedStateV2 } from '../types'
 
-const KEY_V1 = 'pricepeek:v1'
-const KEY_V2 = 'pricepeek:v2'
-const LEADERBOARD_KEY = 'pricepeek:leaderboard:v1'
+const KEY_V1 = 'peekle:v1'
+const KEY_V2 = 'peekle:v2'
+const LEADERBOARD_KEY = 'peekle:leaderboard:v1'
 
 export type LeaderboardEntry = {
   score: number
